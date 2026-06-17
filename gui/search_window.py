@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from csv_handler import load_students, update_student
+from database import get_student_by_number, update_student
 
 
 def create_search_window():
@@ -74,39 +74,38 @@ def create_search_window():
 # Search Function
 
     def search_student():
+
         student_no = student_no_entry.get().strip()
 
-        students = load_students(
-            "student_data.csv"
+        student = get_student_by_number(
+            student_no
         )
 
-        for student in students:
+        if student:
 
-            if student["Student No"].strip() == student_no:
+            result_label.config(
+                text=f"""
+            Student No: {student[0]}
+        
+            Name: {student[1]}
+            Surname: {student[2]}
+            Module: {student[3]}
+        
+            Quiz: {student[4]}
+            Project: {student[5]}
+            Exam: {student[6]}
+            Practical: {student[7]}
+        
+            Overall Grade: {student[8]}
+            """
+                    )
 
-                result_label.config(
-                    text=f"""
-                Student No: {student['Student No']}
-                
-                Name: {student['Name']}
-                Surname: {student['Surname']}
-                Module: {student['Module']}
-                
-                Quiz: {student['Quiz(10%)']}
-                Project: {student['Project(20%)']}
-                Exam: {student['Final Exam(50%)']}
-                Practical: {student['Practical(20%)']}
-                
-                Overall Grade: {student['Overall Grade']}
-                """
-                )
+        else:
 
-                return
-
-        messagebox.showerror(
-            "Not Found",
-            "Student not found."
-        )
+            messagebox.showerror(
+                "Not Found",
+                "Student not found."
+            )
 
 # Update Function
 

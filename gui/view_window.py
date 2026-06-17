@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from csv_handler import load_students, delete_student
+from database import get_students, delete_student
 
 def create_view_window():
     window = tk.Toplevel()
@@ -35,22 +35,16 @@ def create_view_window():
         for row in tree.get_children():
             tree.delete(row)
 
-        students = load_students(
-            "student_data.csv" )
+        students = get_students()
 
         for student in students:
 
             tree.insert(
                 "",
                 "end",
-                values=(
-                    student["Student No"],
-                    student["Name"],
-                    student["Surname"],
-                    student["Module"],
-                    student["Overall Grade"]
-                )
+                values=student
             )
+
 
     def delete_selected():
 
