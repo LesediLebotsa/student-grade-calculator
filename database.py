@@ -52,8 +52,8 @@ def delete_student(student_no):
 
     cursor.execute(
         """
-        "DELETE FROM students"
-        " WHERE student_no = ?
+         DELETE FROM students
+         WHERE student_no = ?
         """,
         (student_no,)
     )

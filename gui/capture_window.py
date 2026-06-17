@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from validation import validate_mark
 from calculations import calculate_grade
-from csv_handler import add_students
+from database import add_student
 
 def create_capture_window():
     window = tk.Toplevel()
@@ -56,7 +56,7 @@ def create_capture_window():
 
         student = {
 
-            "Students No": student_no,
+            "Student No": student_no,
             "Name": name,
             "Surname": surname,
             "Module": module,
@@ -67,7 +67,7 @@ def create_capture_window():
             "Overall Grade": overall_grade
         }
 
-        add_students(student)
+        add_student(student)
 
         messagebox.showinfo(
             "Success",
