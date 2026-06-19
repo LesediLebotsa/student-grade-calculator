@@ -1,4 +1,6 @@
 import tkinter as tk
+from gui.weighting_window import create_weighting_window
+from gui.analytics_window import create_analytics_window
 from gui.capture_window import create_capture_window
 from gui.view_window import create_view_window
 from gui.search_window import create_search_window
@@ -57,6 +59,23 @@ def create_main_menu():
 
     search_btn.pack(pady=10)
 
+    analytics_btn =tk.Button(
+        root,
+        text="Analytics Dashboard",
+        width=25,
+        height=2,
+        command=create_analytics_window
+    )
+    analytics_btn.pack(pady=10)
+
+    weights_btn = tk.Button(
+        root,
+        text="Weighting Settings",
+        width=25,
+        command=create_weighting_window
+    )
+    weights_btn.pack(pady=5)
+
     exit_btn = tk.Button(
         root,
         text="Close Application",
@@ -67,3 +86,4 @@ def create_main_menu():
     exit_btn.pack(pady=10)
 
     root.mainloop()
+

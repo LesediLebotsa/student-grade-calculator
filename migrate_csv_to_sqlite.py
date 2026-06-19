@@ -9,7 +9,7 @@ from database import (
 create_table()
 
 with open(
-        "student_data.csv",
+        "legacy_code/student_data.csv",
         "r",
         newline=""
 ) as file:

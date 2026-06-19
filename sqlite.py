@@ -1,12 +1,4 @@
-from database import *
-
-update_student(
-    "Eduv20214",
-    "Quiz(10%)",
-    95
-)
-print(
-    get_student_by_number(
-        "Eduv20214"
-    )
-)
+from database import create_weightings, seed_weighting, get_weightings
+create_weightings()
+seed_weighting()
+print(get_weightings())
