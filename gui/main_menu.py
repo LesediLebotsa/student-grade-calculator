@@ -5,6 +5,7 @@ from gui.capture_window import create_capture_window
 from gui.view_window import create_view_window
 from gui.search_window import create_search_window
 from gui.users_window import create_user_window
+from reports import export_csv, export_pdf
 
 def open_capture():
     create_capture_window()
@@ -94,6 +95,18 @@ def create_main_menu(role):
             command=create_user_window
         )
         user_management_btn.pack(pady=5)
+
+        tk.Button(
+            root,
+            text="Export CSV Report",
+            command=export_csv
+        ).pack(pady=5)
+
+        tk.Button(
+            root,
+            text="Export PDF Report",
+            command=export_pdf
+        ).pack(pady=5)
 
     exit_btn = tk.Button(
         root,
