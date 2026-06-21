@@ -1,6 +1,8 @@
 import sqlite3
 import os
-from calculations import calculate_grade
+from sys import exception
+
+from services.auth_services import hash_password
 
 BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
@@ -285,3 +287,58 @@ def recalculate_all_students():
 
     conn.commit()
     conn.close()
+
+def create_users_table():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE,
+            password_hash TEXT,
+            role TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+def create_user(username, password, role):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    password_hash = hash_password(password)
+
+    cursor.execute("""
+        INSERT INTO users
+        (username, password_hash, role)
+        VALUES (?, ?, ?)
+    """, (
+        username,
+        password_hash,
+        role
+    ))
+
+    conn.commit()
+    conn.close()
+def verify_user(username, password):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    password_hash = hash_password(password)
+
+    cursor.execute("""
+        SELECT role
+        FROM users
+        WHERE username = ?
+        AND password_hash = ?
+        """,(
+        username,
+        password_hash
+    ))
+    result = cursor.fetchone()
+    conn.close()
+
+    return result
+
+

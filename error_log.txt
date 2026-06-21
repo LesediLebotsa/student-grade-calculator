@@ -1,0 +1,16 @@
+import traceback
+
+try:
+
+    create_user(...)
+
+except Exception:
+
+    with open(
+        "error_log.txt",
+        "a"
+    ) as file:
+
+        file.write(
+            traceback.format_exc()
+        )

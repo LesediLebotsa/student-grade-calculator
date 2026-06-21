@@ -1,3 +1,3 @@
-from gui.main_menu import create_main_menu
+from gui.login_window import create_login_window
 
-create_main_menu()
+create_login_window()

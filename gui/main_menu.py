@@ -4,6 +4,7 @@ from gui.analytics_window import create_analytics_window
 from gui.capture_window import create_capture_window
 from gui.view_window import create_view_window
 from gui.search_window import create_search_window
+from gui.users_window import create_user_window
 
 def open_capture():
     create_capture_window()
@@ -14,7 +15,7 @@ def open_view():
 def open_search():
     create_search_window()
 
-def create_main_menu():
+def create_main_menu(role):
     root = tk.Tk()
 
     root.title("Student Grade Calculator")
@@ -28,6 +29,12 @@ def create_main_menu():
     )
 
     title.pack(pady=20)
+
+    tk.Label(
+        root,
+        text=f"Role:{role}",
+        font=("Arial", 10, "bold")
+    ).pack(pady=5)
 
     capture_btn = tk.Button(
         root,
@@ -68,13 +75,25 @@ def create_main_menu():
     )
     analytics_btn.pack(pady=10)
 
-    weights_btn = tk.Button(
-        root,
-        text="Weighting Settings",
-        width=25,
-        command=create_weighting_window
-    )
-    weights_btn.pack(pady=5)
+    if role == "admin":
+
+        weights_btn = tk.Button(
+            root,
+            text="Weighting Settings",
+            width=25,
+            height=2,
+            command=create_weighting_window
+        )
+        weights_btn.pack(pady=5)
+
+        user_management_btn = tk.Button(
+            root,
+            text="Manage users",
+            width=25,
+            height=2,
+            command=create_user_window
+        )
+        user_management_btn.pack(pady=5)
 
     exit_btn = tk.Button(
         root,
