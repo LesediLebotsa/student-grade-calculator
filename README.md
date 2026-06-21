@@ -1,7 +1,5 @@
 # STUDENT GRADE CALCULATOR
 
-The student grade caculator is a python application that allows users to capture, calculate, search, update, view and delete student assessment records. Student information is stored in CSV files and overall grades are calculated using predefined weightings
-
 # FEATURES 
 * Authentication
 * RoleBased Access
